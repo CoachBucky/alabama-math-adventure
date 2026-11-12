@@ -10,33 +10,74 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuideRouteImport } from './routes/guide'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as MapGradeRouteImport } from './routes/map.$grade'
+import { Route as PlayLevelIdRouteImport } from './routes/play.$levelId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuideRoute = GuideRouteImport.update({
+  id: '/guide',
+  path: '/guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapGradeRoute = MapGradeRouteImport.update({
+  id: '/map/$grade',
+  path: '/map/$grade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayLevelIdRoute = PlayLevelIdRouteImport.update({
+  id: '/play/$levelId',
+  path: '/play/$levelId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/guide': typeof GuideRoute
+  '/progress': typeof ProgressRoute
+  '/map/$grade': typeof MapGradeRoute
+  '/play/$levelId': typeof PlayLevelIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/guide': typeof GuideRoute
+  '/progress': typeof ProgressRoute
+  '/map/$grade': typeof MapGradeRoute
+  '/play/$levelId': typeof PlayLevelIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/guide': typeof GuideRoute
+  '/progress': typeof ProgressRoute
+  '/map/$grade': typeof MapGradeRoute
+  '/play/$levelId': typeof PlayLevelIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/guide' | '/progress' | '/map/$grade' | '/play/$levelId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/guide' | '/progress' | '/map/$grade' | '/play/$levelId'
+  id:
+    '__root__' | '/' | '/guide' | '/progress' | '/map/$grade' | '/play/$levelId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GuideRoute: typeof GuideRoute
+  ProgressRoute: typeof ProgressRoute
+  MapGradeRoute: typeof MapGradeRoute
+  PlayLevelIdRoute: typeof PlayLevelIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +89,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guide': {
+      id: '/guide'
+      path: '/guide'
+      fullPath: '/guide'
+      preLoaderRoute: typeof GuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map/$grade': {
+      id: '/map/$grade'
+      path: '/map/$grade'
+      fullPath: '/map/$grade'
+      preLoaderRoute: typeof MapGradeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/play/$levelId': {
+      id: '/play/$levelId'
+      path: '/play/$levelId'
+      fullPath: '/play/$levelId'
+      preLoaderRoute: typeof PlayLevelIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GuideRoute: GuideRoute,
+  ProgressRoute: ProgressRoute,
+  MapGradeRoute: MapGradeRoute,
+  PlayLevelIdRoute: PlayLevelIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

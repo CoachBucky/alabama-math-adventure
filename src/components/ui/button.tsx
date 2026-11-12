@@ -16,12 +16,22 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        coral:
+          "press-3d shadow-press bg-primary text-primary-foreground font-display font-semibold [--press-shadow:var(--primary-deep)]",
+        teal: "press-3d shadow-press bg-secondary text-secondary-foreground font-display font-semibold [--press-shadow:var(--secondary-deep)]",
+        sunny:
+          "press-3d shadow-press bg-sunny text-sunny-foreground font-display font-semibold [--press-shadow:var(--sunny-deep)]",
+        paper:
+          "press-3d shadow-press bg-card text-card-foreground border-2 border-border font-display font-semibold [--press-shadow:var(--border)]",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
+        game: "h-14 rounded-2xl px-7 text-lg [&_svg]:size-5",
+        xl: "h-16 rounded-3xl px-10 text-2xl [&_svg]:size-7",
+        round: "h-12 w-12 rounded-full [&_svg]:size-6",
       },
     },
     defaultVariants: {
