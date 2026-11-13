@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const TOKEN = /(\d+ \d+\/\d+|□\/\d+|\d+\/\d+|□|◯)/g;
 
-function Frac({ n, d, whole }: { n: string; d: string; whole?: string }) {
+function Frac({ n, d, whole }: { n: string; d: string; whole?: string | undefined }) {
   return (
     <span className="mx-0.5 inline-flex items-center gap-1 align-middle">
       {whole && <span>{whole}</span>}
@@ -45,9 +45,9 @@ export function MathText({ text, className }: { text: string; className?: string
             />
           );
         let m = part.match(/^(\d+) (\d+)\/(\d+)$/);
-        if (m) return <Frac key={i} whole={m[1]} n={m[2]} d={m[3]} />;
+        if (m) return <Frac key={i} whole={m[1]!} n={m[2]!} d={m[3]!} />;
         m = part.match(/^(□|\d+)\/(\d+)$/);
-        if (m) return <Frac key={i} n={m[1]} d={m[2]} />;
+        if (m) return <Frac key={i} n={m[1]!} d={m[2]!} />;
         return <Fragment key={i}>{part}</Fragment>;
       })}
     </span>

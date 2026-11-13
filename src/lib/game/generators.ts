@@ -1,4 +1,4 @@
-import { frac, gcd, mixed, numberDistractors, pick, randInt, shuffle, withChoices } from "./random";
+import { frac, gcd, mixed, numberDistractors, pick, randInt, shuffle, shuffle2, withChoices } from "./random";
 import type { LevelNumber, Question, Rng } from "./types";
 
 type Gen = (rng: Rng, level: LevelNumber) => Question;
@@ -37,7 +37,7 @@ const g3Mult: Gen = (rng, level) => {
       const g = randInt(rng, 2, 5);
       const e = randInt(rng, 2, 6);
       return {
-        prompt: `There are ${g} groups with ${e} stars in each group. How many stars in all?`,
+        prompt: `There are ${g} groups with ${e} dots in each group. How many dots in all?`,
         visual: { kind: "groups", groups: g, each: e },
         answer: String(g * e),
         choices: withChoices(rng, String(g * e), numberDistractors(rng, g * e, [g + e, g * e + e, g * e - e])),
@@ -267,7 +267,7 @@ const g3Equiv: Gen = (rng, level) => {
     const sameDen = rng() < 0.5;
     if (sameDen) {
       const d = pick(rng, [4, 6, 8]);
-      const [a, b] = shuffle(rng, [randInt(rng, 1, d - 1), randInt(rng, 1, d - 1)]);
+      const [a, b] = shuffle2(rng, randInt(rng, 1, d - 1), randInt(rng, 1, d - 1));
       const ans = a > b ? ">" : a < b ? "<" : "=";
       return {
         prompt: `Compare: ${frac(a, d)} ◯ ${frac(b, d)}`,
@@ -279,7 +279,8 @@ const g3Equiv: Gen = (rng, level) => {
       };
     }
     const n = randInt(rng, 1, 2);
-    const [d1, d2] = shuffle(rng, pick(rng, [[3, 6], [2, 8], [4, 8], [3, 4], [2, 6]] as const));
+    const pairD = pick(rng, [[3, 6], [2, 8], [4, 8], [3, 4], [2, 6]] as const);
+    const [d1, d2] = shuffle2<number>(rng, pairD[0], pairD[1]);
     const ans = d1 < d2 ? ">" : "<";
     return {
       prompt: `Compare: ${frac(n, d1)} ◯ ${frac(n, d2)}`,

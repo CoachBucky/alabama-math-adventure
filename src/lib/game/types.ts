@@ -8,23 +8,23 @@ export type Visual =
   | { kind: "fractionBar"; parts: number; shaded: number }
   | { kind: "fractionCircle"; parts: number; shaded: number }
   | { kind: "fractionBars"; bars: { parts: number; shaded: number }[] }
-  | { kind: "numberLine"; parts: number; mark: number; wholes?: number }
+  | { kind: "numberLine"; parts: number; mark: number; wholes?: number | undefined }
   | { kind: "areaGrid"; w: number; h: number }
-  | { kind: "rect"; w: number; h: number; unit: string; labelH?: string }
+  | { kind: "rect"; w: number; h: number; unit: string; labelH?: string | undefined }
   | { kind: "decimalGrid"; shaded: number };
 
 export interface Question {
   /** Text shown to the student. Fractions like 3/4 and mixed numbers like 1 2/3 render stacked; □ renders as a blank box. */
   prompt: string;
-  visual?: Visual;
+  visual?: Visual | undefined;
   /** Correct answer, compared as a normalized string. */
   answer: string;
   /** Multiple-choice options. When absent, the student types a number on the keypad. */
-  choices?: string[];
+  choices?: string[] | undefined;
   /** Allows the decimal point on the keypad. */
-  allowDecimal?: boolean;
+  allowDecimal?: boolean | undefined;
   /** Unit shown after the typed answer (e.g. "square units"). */
-  unit?: string;
+  unit?: string | undefined;
   hint: string;
   explanation: string;
 }

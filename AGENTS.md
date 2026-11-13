@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Game content lives in `src/lib/game/`: curriculum (worlds/levels), procedural question generators, and pure scoring rules (`rules.ts`). Keep scoring and unlock logic in `rules.ts` so `src/test/game.test.ts` covers it.
+- Questions are generated randomly at play time, so build them on the client after mount (never during render/SSR) to avoid hydration mismatches.
+- Student progress is stored per device in localStorage via `useProfile` (useSyncExternalStore with an empty server snapshot); there are no accounts yet.
+- Read-aloud uses the browser's built-in speech voice (`speechSynthesis`) with `toSpoken()` converting math notation to words; no server is needed.

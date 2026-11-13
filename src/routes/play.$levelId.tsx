@@ -75,7 +75,7 @@ function PlayPage() {
   const [results, setResults] = useState<Result[]>([]);
   const [streak, setStreak] = useState(0);
   const [coins, setCoins] = useState(0);
-  const [cheer, setCheer] = useState(CHEERS[0]);
+  const [cheer, setCheer] = useState("Awesome!");
   const [shake, setShake] = useState(0);
   const [finished, setFinished] = useState<{ stars: Stars; correct: number } | null>(null);
 
@@ -111,7 +111,7 @@ function PlayPage() {
         setStreak(nextStreak);
         setCoins((c) => c + coinsForAnswer(firstTry, nextStreak));
         setResults((r) => [...r, firstTry ? "first" : "second"]);
-        setCheer(CHEERS[Math.floor(Math.random() * CHEERS.length)]);
+        setCheer(CHEERS[Math.floor(Math.random() * CHEERS.length)] ?? "Great job!");
         setPhase("correct");
         if (sound) sounds.correct();
       } else {
@@ -203,7 +203,7 @@ function PlayPage() {
         <p className="font-display font-semibold text-muted-foreground">
           {world.icon} {world.name} · {level.title}
         </p>
-        <label className="flex items-center gap-2 font-semibold text-muted-foreground">
+        <label className="flex shrink-0 items-center gap-2 whitespace-nowrap font-semibold text-muted-foreground">
           Auto read
           <Switch
             checked={profile.settings.autoRead}
@@ -237,7 +237,7 @@ function PlayPage() {
 
             <section key={`a-${idx}-${shake}`} className={cn("mt-5", shake > 0 && phase !== "correct" && "animate-wiggle")}>
               {q.choices ? (
-                <div className={cn("grid gap-3", q.choices.length === 3 && q.choices[0].length <= 2 ? "grid-cols-3" : "sm:grid-cols-2")}>
+                <div className={cn("grid gap-3", q.choices.length === 3 && q.choices.every((c) => c.length <= 2) ? "grid-cols-3" : "sm:grid-cols-2")}>
                   {q.choices.map((c) => {
                     const isAnswer = isCorrect(c, q.answer);
                     const wrong = wrongPicks.includes(c) || (phase === "reveal" && picked === c);

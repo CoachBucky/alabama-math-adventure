@@ -75,8 +75,8 @@ describe("question makers", () => {
         const q = generateQuestion(id, 1, rng);
         const m = q.prompt.match(/^([\d,]+) ([×÷]) ([\d,]+) = □$/);
         if (!m) continue;
-        const a = Number(m[1].replace(/,/g, ""));
-        const b = Number(m[3].replace(/,/g, ""));
+        const a = Number(m[1]!.replace(/,/g, ""));
+        const b = Number(m[3]!.replace(/,/g, ""));
         expect(Number(q.answer)).toBe(m[2] === "×" ? a * b : a / b);
       }
     }

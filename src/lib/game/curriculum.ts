@@ -187,7 +187,7 @@ const defs: WorldDef[] = [
 export const WORLDS: World[] = defs.map(({ levelTitles, levelFocus, ...w }) => ({
   ...w,
   levels: ([1, 2, 3] as LevelNumber[]).map(
-    (n): Level => ({ id: `${w.id}-${n}`, worldId: w.id, n, title: levelTitles[n - 1], focus: levelFocus[n - 1] }),
+    (n): Level => ({ id: `${w.id}-${n}`, worldId: w.id, n, title: levelTitles[n - 1]!, focus: levelFocus[n - 1]! }),
   ),
 }));
 

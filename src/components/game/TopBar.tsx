@@ -11,7 +11,7 @@ export function TopBar() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
         <Link to="/" className="flex items-center gap-2">
           <img src={fox} alt="" width={40} height={40} className="size-10" />
-          <span className="font-display text-xl font-bold tracking-tight">
+          <span className="hidden font-display text-xl font-bold tracking-tight sm:inline">
             Math <span className="text-primary">Quest</span>
           </span>
         </Link>

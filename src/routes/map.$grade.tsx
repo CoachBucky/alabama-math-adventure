@@ -57,7 +57,7 @@ function MapPage() {
   const profile = useProfile();
   const worlds = worldsForGrade(grade);
   const island = GRADES.find((g) => g.grade === grade)!.island;
-  const [selectedId, setSelectedId] = useState(worlds[0].id);
+  const [selectedId, setSelectedId] = useState(worlds[0]!.id);
 
   const worldStars = (w: World) => w.levels.reduce((s, l) => s + (profile.levels[l.id]?.stars ?? 0), 0);
   const earned = worlds.reduce((s, w) => s + worldStars(w), 0);
@@ -70,7 +70,7 @@ function MapPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [grade, Object.keys(profile.levels).length]);
 
-  const selected = worlds.find((w) => w.id === selectedId) ?? worlds[0];
+  const selected = worlds.find((w) => w.id === selectedId) ?? worlds[0]!;
   const pathD = worlds.map((w, i) => `${i === 0 ? "M" : "L"} ${w.pos.x} ${w.pos.y}`).join(" ");
 
   return (

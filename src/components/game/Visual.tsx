@@ -39,7 +39,7 @@ function FractionCircle({ parts, shaded }: { parts: number; shaded: number }) {
   );
 }
 
-function NumberLine({ parts, mark, wholes = 1 }: { parts: number; mark: number; wholes?: number }) {
+function NumberLine({ parts, mark, wholes = 1 }: { parts: number; mark: number; wholes?: number | undefined }) {
   const x0 = 30;
   const x1 = 490;
   const total = parts * wholes;
@@ -68,7 +68,7 @@ function NumberLine({ parts, mark, wholes = 1 }: { parts: number; mark: number; 
   );
 }
 
-function Rect({ w, h, unit, labelH }: { w: number; h: number; unit: string; labelH?: string }) {
+function Rect({ w, h, unit, labelH }: { w: number; h: number; unit: string; labelH?: string | undefined }) {
   const scale = Math.min(260 / w, 150 / h);
   const rw = w * scale;
   const rh = h * scale;

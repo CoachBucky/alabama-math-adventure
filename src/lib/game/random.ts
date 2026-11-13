@@ -3,16 +3,19 @@ import type { Rng } from "./types";
 export const randInt = (rng: Rng, min: number, max: number) =>
   Math.floor(rng() * (max - min + 1)) + min;
 
-export const pick = <T,>(rng: Rng, items: readonly T[]): T => items[Math.floor(rng() * items.length)];
+export const pick = <T,>(rng: Rng, items: readonly T[]): T => items[Math.floor(rng() * items.length)] as T;
 
 export function shuffle<T>(rng: Rng, items: readonly T[]): T[] {
   const a = [...items];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [a[i], a[j]] = [a[j] as T, a[i] as T];
   }
   return a;
 }
+
+/** Two values in random order. */
+export const shuffle2 = <T,>(rng: Rng, x: T, y: T): [T, T] => (rng() < 0.5 ? [x, y] : [y, x]);
 
 /** Deterministic generator for tests. */
 export function seeded(seed: number): Rng {

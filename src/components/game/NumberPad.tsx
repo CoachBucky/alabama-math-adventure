@@ -6,9 +6,9 @@ interface Props {
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
-  allowDecimal?: boolean;
-  disabled?: boolean;
-  unit?: string;
+  allowDecimal?: boolean | undefined;
+  disabled?: boolean | undefined;
+  unit?: string | undefined;
 }
 
 const MAX = 7;
